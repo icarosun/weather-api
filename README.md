@@ -17,3 +17,24 @@ Deve ser possível para cada estação na Bacia:
 
 4 - Obter a interpretação dos dados Hidrológicos observados e previstos
   -> Cota
+
+## Getting Started
+
+```sh 
+npm install
+```
+
+```sh 
+npx prisma migrate deploy 
+```
+
+```sh 
+npm run seeds
+```
+
+```sh 
+npm run forecast
+```
+
+
+```
