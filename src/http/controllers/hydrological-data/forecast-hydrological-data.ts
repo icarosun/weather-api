@@ -26,3 +26,33 @@ export async function forecastHydrologicalDataController(
 
   return reply.status(200).send(forecastHydrologicalData)
 }
+
+type addForecastHydrologicalDataControllerRequestBody = {
+  stationId: string,
+  firstDate: string,
+  lastDate: string,
+  forecasts: {
+    date: string, 
+    elevation: number,
+    flow: number
+    station_id: string
+  } []
+}
+
+export async function addForecastHydrologicalDataController(
+  request: FastifyRequest<{
+    Body: addForecastHydrologicalDataControllerRequestBody
+  }>,
+  reply: FastifyReply
+) {
+  const body = request.body
+
+  const postForecastHydrologicalDataUseCase = 
+    new PostForecastHydrologicalDataUseCase(
+      new ForecastHydrologicalDataRepositoryImpl()
+    )
+
+  console.log(body)
+
+  return reply.status(200).send({"message": "OK"})
+}

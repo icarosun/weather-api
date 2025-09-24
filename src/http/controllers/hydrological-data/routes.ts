@@ -11,8 +11,8 @@ export async function hydrologicalDataRoutes(app: FastifyInstance) {
     '/api/hydrological-data/forecast/:stationId',
     forecastHydrologicalDataController
   )
-  app.post<{ Params: HydrologicalDataRouteParams }>(
-    '/api/hydrological-data/forecast/:stationId',
+  app.post(
+    '/api/hydrological-data/forecast',
     addForecastHydrologicalDataController
   )
   app.get<{ Params: HydrologicalDataRouteParams }>(
