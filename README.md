@@ -25,6 +25,10 @@ npm install
 ```
 
 ```sh 
+docker compose up -d 
+```
+
+```sh 
 npx prisma migrate deploy 
 ```
 
