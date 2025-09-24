@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { forecastHydrologicalDataController } from './forecast-hydrological-data'
+import { forecastHydrologicalDataController, addForecastHydrologicalDataController } from './forecast-hydrological-data'
 import { observedHydrologicalDataController } from './observed-hydrological-data'
 
 type HydrologicalDataRouteParams = {
@@ -10,6 +10,10 @@ export async function hydrologicalDataRoutes(app: FastifyInstance) {
   app.get<{ Params: HydrologicalDataRouteParams }>(
     '/api/hydrological-data/forecast/:stationId',
     forecastHydrologicalDataController
+  )
+  app.post<{ Params: HydrologicalDataRouteParams }>(
+    '/api/hydrological-data/forecast/:stationId',
+    addForecastHydrologicalDataController
   )
   app.get<{ Params: HydrologicalDataRouteParams }>(
     '/api/hydrological-data/observed/:stationId',
