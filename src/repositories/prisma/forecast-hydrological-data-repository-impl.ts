@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma'
 export class ForecastHydrologicalDataRepositoryImpl implements ForecastHydrologicalDataRepository {
   async getDefaultValues(stationId: string) {
     const forecastDataArray: ForecastHydrologicalData[] = []
-    const forecastDayRange = 30
+    const forecastDayRange = 15
     const today = new Date()
     const futureDate = new Date(today)
 
@@ -50,9 +50,15 @@ export class ForecastHydrologicalDataRepositoryImpl implements ForecastHydrologi
     return forecastHydrologicalData
   }
 
+  async createMany(data: Prisma.ForecastHydrologicalDataUncheckedCreateInput) {
+    const forecastHydrologicalData = await prisma.forecastHydrologicalData.createMany({
+      data
+    })
+
+    return forecastHydrologicalData
+  }
+
   async clearAll() {
     await prisma.forecastHydrologicalData.deleteMany({})
   }
-
-  
 }
