@@ -27,5 +27,16 @@ export class PostForecastHydrologicalDataUseCase {
 
   async execute(
     data: PostForecastHydrologicalDataUseCaseRequest
-  ): Promise<PostAddForecastHydrologicalDataUseCaseResponse | null>
+  ): Promise<PostAddForecastHydrologicalDataUseCaseResponse | null> {
+    //TODO: check the date
+    
+    const createForecastHydrologicalData = await this.forecastHydrologicalDataRepository.createMany(data.forecasts)
+
+    return {
+      stationId: data.stationId,
+      count: createForecastHydrologicalData.count,
+      firstDate: data.firstDate,
+      lastDate: data.lastDate
+    }
+  }
 }
