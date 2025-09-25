@@ -1,6 +1,7 @@
 import { ElevationClimatologyRepositoryImpl } from '@/repositories/prisma/elevation-climatology-repository-impl'
 import { ForecastHydrologicalDataRepositoryImpl } from '@/repositories/prisma/forecast-hydrological-data-repository-impl'
 import { GetForecastHydrologicalDataUseCase } from '@/use-cases/get-forecast-hydrological-data'
+import { PostForecastHydrologicalDataUseCase } from '@/use-cases/post-forecast-hydrological-data'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 type ForecastHydrologicalDataControllerRouteParams = {
@@ -52,7 +53,9 @@ export async function addForecastHydrologicalDataController(
       new ForecastHydrologicalDataRepositoryImpl()
     )
 
-  console.log(body)
+  const addForecastHydrologicalData = await postForecastHydrologicalDataUseCase.execute(body)
 
-  return reply.status(200).send({"message": "OK"})
+  //TODO: verify the error case
+
+  return reply.status(200).send(addForecastHydrologicalData)
 }
