@@ -1,13 +1,11 @@
-version: '3'
-
 services: 
   weather-api-pg:
-    image: bitnami/postgresql
+    image: postgres
     ports:
-      - 5433:5432
+      - 5432:5432
     environment:
-      - POSTGRESQL_USERNAME=labclim
-      - POSTGRESQL_PASSWORD=labclim
-      - POSTGRESQL_DATABASE=weatherapi
+      POSTGRES_USER: labclim
+      POSTGRES_PASSWORD: labclim
+      POSTGRES_DB: weatherapi
 
 
