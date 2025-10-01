@@ -34,7 +34,7 @@ export class RegisterObservedHydrologicalDataUseCase {
         if (registerWithAcceptableCompleteness) {
           await this.observedHydrologicalDataRepository.create({
             date: new Date(observedWeatherData.items[0].data_ult),
-            elevation: observedWeatherData.items[0].nivel_ult / 100, // cm -> m
+            elevation: observedWeatherData.items[0].nivel_ult, // cm -> m
             flow: observedWeatherData.items[0].vazao_ult,
             accumulated_rain: observedWeatherData.items[0].chuva_ult ?? 0,
             station_id: station.id,
