@@ -2,6 +2,7 @@ import { ElevationClimatologyRepository } from '@/repositories/elevation-climato
 import { ObservedHydrologicalDataRepository } from '@/repositories/observed-hydrological-data-repository'
 import { getClimatologicalInterpretation } from '@/utils/get-climatological-interpretation'
 import { getDayOfYear } from '@/utils/get-day-of-year'
+import { getDifferenceDatein24h } from '@/utils/get-difference-date-in-24h'
 
 type GetLastObservedHydrologicalDataUseCaseRequest = {
   stationId: string
@@ -44,6 +45,16 @@ export class GetLastObservedHydrologicalDataUseCase {
       return null
     }
 
+    const date24hChange = getDifferenceDatein24h(observedHydrologicalData!.date)
+
+    const previousDayObservedHydrologicalData = 
+      await this.observedHydrologicalDataRepository.getPreviousData(stationId, date24hChange)
+
+    let calculateDailyVariation = null
+    if (previousDayObservedHydrologicalData) {
+      calculateDailyVariation = observedHydrologicalData!.elevation - previousDayObservedHydrologicalData!.elevation
+    }
+
     return {
       id: observedHydrologicalData!.id,
       date: observedHydrologicalData!.date,
@@ -52,6 +63,7 @@ export class GetLastObservedHydrologicalDataUseCase {
       accumulated_rain: observedHydrologicalData!.accumulated_rain.toNumber(),
       station_id: observedHydrologicalData!.station_id,
       climatologicalInterpretation,
+      dailyVariation: calculateDailyVariation,
     }
   }
 }
