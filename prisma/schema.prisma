@@ -59,6 +59,8 @@ model ForecastHydrologicalData {
   date      DateTime
   flow      Decimal
   elevation Decimal
+  low_derivation Decimal
+  upp_derivation Decimal
 
   Station    Station @relation(fields: [station_id], references: [id])
   station_id String
