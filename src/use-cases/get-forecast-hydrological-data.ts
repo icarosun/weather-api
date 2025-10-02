@@ -17,6 +17,8 @@ type GetForecastHydrologicalDataUseCaseResponse = {
   flow: number
   station_id: string
   climatologicalInterpretation: string
+  low_derivation: number
+  upp_derivation: number
 }
 
 export class GetForecastHydrologicalDataUseCase {
@@ -53,6 +55,8 @@ export class GetForecastHydrologicalDataUseCase {
         id: forecastRegister.id,
         date: forecastRegister.date,
         elevation: forecastRegister.elevation.toNumber(),
+        low_derivation: forecastRegister.low_derivation.toNumber(),
+        upp_derivation: forecastRegister.upp_derivation.toNumber(),
         flow: forecastRegister.flow.toNumber(),
         station_id: forecastRegister.station_id,
         climatologicalInterpretation,
