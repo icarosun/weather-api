@@ -30,6 +30,10 @@ export class GetLastObservedHydrologicalDataUseCase {
     const observedHydrologicalData =
       await this.observedHydrologicalDataRepository.getLast(stationId)
 
+    if (!observedHydrologicalData) {
+      return null
+    }
+
     const climatologicalRegister =
       await this.elevationClimatologyRepository.findByDayAndStation({
         day: getDayOfYear(observedHydrologicalData!.date),
@@ -40,10 +44,6 @@ export class GetLastObservedHydrologicalDataUseCase {
       climatologicalRegister: climatologicalRegister!,
       elevation: observedHydrologicalData!.elevation,
     })
-
-    if (!observedHydrologicalData) {
-      return null
-    }
 
     const date24hChange = getDifferenceDatein24h(observedHydrologicalData!.date)
 
