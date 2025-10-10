@@ -40,5 +40,3 @@ npm run seeds
 npm run forecast
 ```
 
-
-```
