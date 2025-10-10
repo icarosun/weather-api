@@ -55,6 +55,8 @@ export async function addForecastHydrologicalDataController(
 
   const addForecastHydrologicalData = await postForecastHydrologicalDataUseCase.execute(body)
 
+  //TODO: verify if the station exist 
+
   //TODO: verify the error case
 
   return reply.status(200).send(addForecastHydrologicalData)
