@@ -36,7 +36,7 @@ export class GetForecastHydrologicalDataUseCase {
       await this.forecastHydrologicalDataRepository.getDefaultValues(stationId)
 
     if (!forecastDataArray[0]) {
-      return null
+      return []
     }
 
     for await (const forecastRegister of forecastDataArray) {
