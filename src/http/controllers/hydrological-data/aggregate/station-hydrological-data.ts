@@ -20,11 +20,13 @@ export async function stationObservedHydrologicalDataController(
 
   const response = []
 
-  for (var station of stations) {
+  for (const station of stations) {
     var observedHydrologicalData = await getObservedHydrologicalDataUseCase.execute({ stationId: station.id })
 
     response.push({
       ...station,
+      latitude: station.latitude.toNumber(),
+      longitude: station.longitude.toNumber(),
       ...observedHydrologicalData
     })
   }
