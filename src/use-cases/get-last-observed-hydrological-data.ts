@@ -16,6 +16,7 @@ type GetLastObservedHydrologicalDataUseCaseResponse = {
   accumulated_rain: number
   station_id: string
   climatologicalInterpretation: string
+  dailyVariation: number | null,
 }
 
 export class GetLastObservedHydrologicalDataUseCase {
@@ -51,6 +52,7 @@ export class GetLastObservedHydrologicalDataUseCase {
       await this.observedHydrologicalDataRepository.getPreviousData(stationId, date24hChange)
 
     let calculateDailyVariation = null
+
     if (previousDayObservedHydrologicalData) {
       calculateDailyVariation = observedHydrologicalData!.elevation - previousDayObservedHydrologicalData!.elevation
     }
