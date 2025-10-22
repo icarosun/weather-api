@@ -39,7 +39,7 @@ export class GetForecastHydrologicalDataUseCase {
       return []
     }
 
-    for await (const forecastRegister of forecastDataArray) {
+    for await (const forecastRegister of forecastDataArray.slice(0, 3)) {
       const climatologicalRegister =
         await this.elevationClimatologyRepository.findByDayAndStation({ 
           day: getDayOfYear(forecastRegister.date),

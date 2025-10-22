@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { forecastHydrologicalDataController, addForecastHydrologicalDataController } from './forecast-hydrological-data'
 import { observedHydrologicalDataController } from './observed-hydrological-data'
-import { stationObservedHydrologicalDataController } from './mobile/station-hydrological-data.ts'
+import { stationObservedHydrologicalDataController } from './aggregate/station-hydrological-data.ts'
 
 type HydrologicalDataRouteParams = {
   stationId: string

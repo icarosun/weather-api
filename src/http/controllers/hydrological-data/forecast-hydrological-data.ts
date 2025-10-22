@@ -58,6 +58,8 @@ export async function addForecastHydrologicalDataController(
   //TODO: verify if the station exist 
 
   //TODO: verify the error case
+  
+  //TODO: delete previous forecasts
 
   return reply.status(200).send(addForecastHydrologicalData)
 }
