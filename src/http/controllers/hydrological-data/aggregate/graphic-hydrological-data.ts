@@ -20,36 +20,34 @@ export async function graphicHydrologicalDataController(
 
   const observedHydrologicalData = await observedHydrologicalDataRepositoryImpl.getLast(stationId)
 
-  const initDay = observedHydrologicalData!.date
+  const startDate = observedHydrologicalData!.date
 
-  initDay.setUTCDate(initDay.getUTCDate() - 10)
+  startDate.setUTCDate(startDate.getUTCDate() - 10)
 
   const response = []
 
   for (let i = 0; i < 20; i += 1) {
+    const currentDate = new Date(startDate)
+    currentDate.setUTCDate(startDate.getUTCDate() + i)
+
+    const castDay = `${currentDate.toISOString().slice(0, 11)}07:00:00.000Z`
+
     let observed = null;
     let forecast = null;
 
     if (i < 11) {
-      observed = await observedHydrologicalDataRepositoryImpl.getDataByDate(stationId, initDay)
-    }
-    const castDay = `${initDay.toISOString().slice(0, 11)}07:00:00.000Z`
-
-    forecast = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
-
-    if (observed !== null) {
-      observed = observed.elevation
+      const observedData = await observedHydrologicalDataRepositoryImpl.getDataByDate(stationId, initDay)
+      observed = observedData ? observedData.elavtion : null
     }
 
-    if (forecast !== null) {
-      forecast = forecast.elevation
-    }
+    const forecastData = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
+    forecast = forecastData ? forecastData.elevation : null
 
     response.push({
-      date: initDay, observed: observed, forecast: forecast
+      date: currentDate.toISOString(),
+      observed,
+      forecast
     })
-
-    initDay.setUTCDate(initDay.getUTCDate() + 1)
   }
 
   return reply.status(200).send(response) 
