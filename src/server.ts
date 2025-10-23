@@ -6,7 +6,7 @@ setInterval(() => registerObservedDataFactory.execute(), 30 * 60 * 1000)
 
 app
   .listen({
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 3333,
   })
   .then(() => {
