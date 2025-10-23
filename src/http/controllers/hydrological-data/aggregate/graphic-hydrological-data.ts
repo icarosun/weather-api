@@ -37,8 +37,16 @@ export async function graphicHydrologicalDataController(
 
     forecast = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
 
+    if (observed !== null) {
+      observed = observed.elevation
+    }
+
+    if (forecast !== null) {
+      forecast = forecast.elevation
+    }
+
     response.push({
-      date: initDay, observed: observed!.elevation, forecast: forecast!.elevation
+      date: initDay, observed: observed, forecast: forecast
     })
 
     initDay.setUTCDate(initDay.getUTCDate() + 1)
