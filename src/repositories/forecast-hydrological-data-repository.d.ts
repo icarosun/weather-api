@@ -6,4 +6,5 @@ export interface ForecastHydrologicalDataRepository {
   create(dataArray: Prisma.ForecastHydrologicalDataUncheckedCreateInput): Promise<ForecastHydrologicalData>
   createMany(dataArray: Prisma.ForecastHydrologicalDataUncheckedCreateInput): Promise<void>
   clearAll(): Promise<void>
+  getDataByDate(stationId: string, date: string): Promise<ForecastHydrologicalData | null>
 }

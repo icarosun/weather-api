@@ -28,12 +28,12 @@ export class ObservedHydrologicalDataRepositoryImpl
     return observedHydrologicalData
   }
 
-  async getPreviousData(stationId: string, previousDay: string) {
+  async getDataByDate(stationId: string, date: string) {
     const observedHydrologicalData =
       await prisma.observedHydrologicalData.findFirst({
         where: {
           station_id: stationId,
-          date: previousDay
+          date: date
         }
       })
 

@@ -49,7 +49,7 @@ export class GetLastObservedHydrologicalDataUseCase {
     const date24hChange = getDifferenceDatein24h(observedHydrologicalData!.date)
 
     const previousDayObservedHydrologicalData = 
-      await this.observedHydrologicalDataRepository.getPreviousData(stationId, date24hChange)
+      await this.observedHydrologicalDataRepository.getDataByDate(stationId, date24hChange)
 
     let calculateDailyVariation = null
 

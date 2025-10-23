@@ -61,4 +61,17 @@ export class ForecastHydrologicalDataRepositoryImpl implements ForecastHydrologi
   async clearAll() {
     await prisma.forecastHydrologicalData.deleteMany({})
   }
+
+  async getDataByDate(stationId: string, date: string) {
+    const forecastHydrologicalData =
+      await prisma.forecastHydrologicalData.findFirst({
+        where: {
+          station_id: stationId,
+          date: date
+        }
+      })
+
+    return forecastHydrologicalData
+  }
+
 }
