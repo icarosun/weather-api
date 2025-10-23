@@ -24,22 +24,21 @@ export async function graphicHydrologicalDataController(
 
   initDay.setUTCDate(initDay.getUTCDate() - 10)
 
-  console.log(initDay)
-
   const response = []
 
   for (let i = 0; i < 20; i += 1) {
     let observed = null;
+    let forecast = null;
 
     if (i < 11) {
       observed = await observedHydrologicalDataRepositoryImpl.getDataByDate(stationId, initDay)
     }
     const castDay = `${initDay.toISOString().slice(0, 11)}07:00:00.000Z`
 
-    let forecast = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
+    forecast = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
 
     response.push({
-      date: initDay, observed: observed, forecast: forecast
+      date: initDay, observed: observed!.elevation, forecast: forecast!.elevation
     })
 
     initDay.setUTCDate(initDay.getUTCDate() + 1)
