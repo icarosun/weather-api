@@ -37,7 +37,7 @@ export async function graphicHydrologicalDataController(
 
     if (i < 11) {
       const observedData = await observedHydrologicalDataRepositoryImpl.getDataByDate(stationId, currentDate)
-      observed = observedData ? observedData.elavtion : null
+      observed = observedData ? observedData.elavation : null
     }
 
     const forecastData = await forecastHydrologicalDataRepositoryImpl.getDataByDate(stationId, castDay)
