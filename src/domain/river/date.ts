@@ -2,7 +2,7 @@ function isLeapYear(year: number) {
   return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
 }
 
-export function getDayOfYear(date: Date) {
+export function getDayOfYear(date: Date): number {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -18,3 +18,13 @@ export function getDayOfYear(date: Date) {
 
   return dayOfYear
 }
+
+export function getDifferenceDatein24h(date: Date): Date {
+  const castDate = new Date(date)
+
+  castDate.setDate(castDate.getDate() - 1)
+
+  return castDate
+}
+
+
