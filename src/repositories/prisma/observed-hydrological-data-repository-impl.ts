@@ -3,8 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { ObservedHydrologicalDataRepository } from '../observed-hydrological-data-repository'
 
 export class ObservedHydrologicalDataRepositoryImpl
-  implements ObservedHydrologicalDataRepository
-{
+  implements ObservedHydrologicalDataRepository {
   async create(data: Prisma.ObservedHydrologicalDataUncheckedCreateInput) {
     const observedHydrologicalData =
       await prisma.observedHydrologicalData.create({
@@ -28,12 +27,12 @@ export class ObservedHydrologicalDataRepositoryImpl
     return observedHydrologicalData
   }
 
-  async getPreviousData(stationId: string, previousDay: string) {
+  async getDataByDate(stationId: string, date: Date) {
     const observedHydrologicalData =
       await prisma.observedHydrologicalData.findFirst({
         where: {
           station_id: stationId,
-          date: previousDay
+          date: date
         }
       })
 
