@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "test": "vitest",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "seeds": "tsx src/repositories/seeds/index.ts",
@@ -16,10 +17,11 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@types/node": "20.11.22",
+    "@types/node": "25.2.2",
     "prisma": "5.12.1",
     "tsup": "8.0.2",
     "tsx": "4.7.1",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "vitest": "4.0.18"
   }
 }
