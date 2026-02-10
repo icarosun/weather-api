@@ -21,36 +21,36 @@ export function ClassifyClimatologicalInterpretation(
   let interpretation: ClimatologyInterpretation = 0;
 
   if (elevation < climatologicalValues!.percentile_between_95_and_100) {
-    interpretation = -3
+    interpretation = ClimatologyInterpretation.EMERGENCIA_ESTIAGEM
   } else if (
     elevation >= climatologicalValues!.percentile_between_95_and_100 &&
     elevation < climatologicalValues!.percentile_between_90_and_95
   ) {
-    interpretation = -2
+    interpretation = ClimatologyInterpretation.ALERTA_ESTIAGEM
   } else if (
     elevation >= climatologicalValues!.percentile_between_90_and_95 &&
     elevation < climatologicalValues!.percentile_between_85_and_90
   ) {
-    interpretation = -1
+    interpretation = ClimatologyInterpretation.ATENCAO_ESTIAGEM
   } else if (
     elevation >= climatologicalValues!.percentile_between_85_and_90 &&
     elevation < climatologicalValues!.percentile_between_15_and_10
   ) {
-    interpretation = 0
+    interpretation = ClimatologyInterpretation.NORMALIDADE
   } else if (
     elevation >= climatologicalValues!.percentile_between_15_and_10 &&
     elevation < climatologicalValues!.percentile_between_10_and_5
   ) {
-    interpretation = 1
+    interpretation = ClimatologyInterpretation.ATENCAO_INUNDACAO
   } else if (
     elevation >= climatologicalValues!.percentile_between_10_and_5 &&
     elevation < climatologicalValues!.percentile_between_5_and_0
   ) {
-    interpretation = 2
+    interpretation = ClimatologyInterpretation.ALERTA_INUNDACAO
   } else if (
     elevation >= climatologicalValues!.percentile_between_5_and_0
   ) {
-    interpretation = 3
+    interpretation = ClimatologyInterpretation.EMERGENCIA_INUNDACAO
   }
 
   return interpretation
