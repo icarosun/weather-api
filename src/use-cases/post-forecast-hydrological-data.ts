@@ -5,11 +5,11 @@ type PostForecastHydrologicalDataUseCaseRequest = {
   firstDate: string,
   lastDate: string,
   forecasts: {
-    date: string, 
+    date: string,
     elevation: number,
     flow: number
     station_id: string
-  } []
+  }[]
 }
 
 type PostAddForecastHydrologicalDataUseCaseResponse = {
@@ -23,14 +23,15 @@ type PostAddForecastHydrologicalDataUseCaseResponse = {
 export class PostForecastHydrologicalDataUseCase {
   constructor(
     private forecastHydrologicalDataRepository: ForecastHydrologicalDataRepository,
-  ) {}
+  ) { }
 
   async execute(
     data: PostForecastHydrologicalDataUseCaseRequest
   ): Promise<PostAddForecastHydrologicalDataUseCaseResponse | null> {
     //TODO: check the date
-    
-    const createForecastHydrologicalData = await this.forecastHydrologicalDataRepository.createMany(data.forecasts)
+
+    const createForecastHydrologicalData =
+      await this.forecastHydrologicalDataRepository.createMany(data.forecasts)
 
     return {
       stationId: data.stationId,
